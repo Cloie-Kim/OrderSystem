@@ -3,6 +3,7 @@ package com.example.ordersystem.Entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,9 +15,14 @@ public class Order {
     @Column
     private Integer quantity;
 
-    public Order(){}
+    protected Order(){}
 
     public Order(String menuName, Integer quantity) {
+        this.menuName = menuName;
+        this.quantity = quantity;
+    }
+
+    public void update(String menuName, Integer quantity) {
         this.menuName = menuName;
         this.quantity = quantity;
     }
