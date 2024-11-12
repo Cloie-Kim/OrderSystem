@@ -4,6 +4,13 @@ spring:
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      is-getter: none
+
   jpa:
     hibernate:
       ddl-auto: update
