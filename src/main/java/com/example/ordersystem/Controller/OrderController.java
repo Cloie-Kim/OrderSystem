@@ -14,4 +14,9 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
+    @GetMapping("/show")
+    public String showMenu() {
+        return "menu";
+    }
 }

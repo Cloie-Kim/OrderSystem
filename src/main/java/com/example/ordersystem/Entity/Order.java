@@ -14,14 +14,10 @@ public class Order {
     @Column
     private Integer quantity;
 
-    @Column
-    private double price;
-
     public Order(){}
 
-    public Order(String menuName, Integer quantity, double price) {
+    public Order(String menuName, Integer quantity) {
         this.menuName = menuName;
         this.quantity = quantity;
-        this.price = price;
     }
 }
