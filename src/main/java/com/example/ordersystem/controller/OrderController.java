@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
@@ -17,23 +18,22 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
-    @PostMapping("/order")
+    @PostMapping
     public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest){
         return orderService.addOrder(orderCreateRequest);
     }
 
-    @GetMapping("/order")
+    @GetMapping
     public OrderGetResponse getOrder() {
         return orderService.getOrder();
     }
 
-    @PutMapping("/order")
+    @PutMapping
     public String updateOrder(@RequestBody OrderUpdateRequest orderUpdateRequest){
         return orderService.updateOrder(orderUpdateRequest);
     }
 
-    @DeleteMapping("/order")
+    @DeleteMapping
     public String deleteOrder(){
         return orderService.deleteOrder();
     }
