@@ -1,16 +1,14 @@
-package com.example.ordersystem.Controller;
+package com.example.ordersystem.controller;
 
-import com.example.ordersystem.DTO.OrderCreateRequest;
-import com.example.ordersystem.DTO.OrderGetResponse;
-import com.example.ordersystem.DTO.OrderUpdateRequest;
-import com.example.ordersystem.Entity.Order;
-import com.example.ordersystem.Service.OrderService;
+import com.example.ordersystem.dto.OrderCreateRequest;
+import com.example.ordersystem.dto.OrderGetResponse;
+import com.example.ordersystem.dto.OrderUpdateRequest;
+import com.example.ordersystem.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
@@ -20,23 +18,22 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
-    @PostMapping("/order")
+    @PostMapping
     public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest){
         return orderService.addOrder(orderCreateRequest);
     }
 
-    @GetMapping("/order")
+    @GetMapping
     public OrderGetResponse getOrder() {
         return orderService.getOrder();
     }
 
-    @PutMapping("/order")
+    @PutMapping
     public String updateOrder(@RequestBody OrderUpdateRequest orderUpdateRequest){
         return orderService.updateOrder(orderUpdateRequest);
     }
 
-    @DeleteMapping("/order")
+    @DeleteMapping
     public String deleteOrder(){
         return orderService.deleteOrder();
     }
