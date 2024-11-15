@@ -1,4 +1,4 @@
-package com.example.ordersystem.controller;
+package com.example.ordersystem.order.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
