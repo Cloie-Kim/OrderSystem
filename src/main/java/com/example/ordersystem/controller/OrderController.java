@@ -1,14 +1,11 @@
-package com.example.ordersystem.Controller;
+package com.example.ordersystem.controller;
 
-import com.example.ordersystem.DTO.OrderCreateRequest;
-import com.example.ordersystem.DTO.OrderGetResponse;
-import com.example.ordersystem.DTO.OrderUpdateRequest;
-import com.example.ordersystem.Entity.Order;
-import com.example.ordersystem.Service.OrderService;
+import com.example.ordersystem.dto.OrderCreateRequest;
+import com.example.ordersystem.dto.OrderGetResponse;
+import com.example.ordersystem.dto.OrderUpdateRequest;
+import com.example.ordersystem.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class OrderController {

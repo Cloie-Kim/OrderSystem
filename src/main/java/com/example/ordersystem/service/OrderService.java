@@ -1,14 +1,12 @@
-package com.example.ordersystem.Service;
+package com.example.ordersystem.service;
 
-import com.example.ordersystem.DTO.OrderCreateRequest;
-import com.example.ordersystem.DTO.OrderGetResponse;
-import com.example.ordersystem.DTO.OrderUpdateRequest;
-import com.example.ordersystem.Entity.Order;
-import com.example.ordersystem.Repository.OrderRepository;
+import com.example.ordersystem.dto.OrderCreateRequest;
+import com.example.ordersystem.dto.OrderGetResponse;
+import com.example.ordersystem.dto.OrderUpdateRequest;
+import com.example.ordersystem.entity.Order;
+import com.example.ordersystem.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OrderService {
