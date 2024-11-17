@@ -15,6 +15,10 @@ public class Orderer {
     @Column(unique = true, nullable = false)
     private String ordererName;
 
-    @OneToMany(mappedBy = "order")
-    private List<Order> order;
+    protected Orderer(){}
+
+    public Orderer(String ordererName) {
+        this.ordererName = ordererName;
+    }
+
 }

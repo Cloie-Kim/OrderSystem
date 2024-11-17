@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @DeleteMapping
-    public String deleteOrder() {
-        return orderService.deleteOrder();
+    public String deleteAllOrder() {
+        return orderService.deleteAllOrder();
     }
 }

@@ -19,7 +19,4 @@ public class Menu {
     @Column(unique = true, nullable = false)
     private Integer price;
 
-    @OneToMany(mappedBy = "order")
-    private List<Order> order;
-
 }
