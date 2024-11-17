@@ -1,5 +1,7 @@
-package com.example.ordersystem.entity;
+package com.example.ordersystem.order.entity;
 
+import com.example.ordersystem.menu.entity.Menu;
+import com.example.ordersystem.orderer.entity.Orderer;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +17,16 @@ public class Order {
     @Column
     private Integer quantity;
 
-    protected Order(){}
+    @ManyToOne
+    @JoinColumn(name = "menuId")
+    private Menu menu;
+
+    @ManyToOne
+    @JoinColumn(name = "ordererId")
+    private Orderer orderer;
+
+    protected Order() {
+    }
 
     public Order(String menuName, Integer quantity) {
         this.menuName = menuName;

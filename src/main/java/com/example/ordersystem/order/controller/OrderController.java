@@ -1,9 +1,9 @@
-package com.example.ordersystem.controller;
+package com.example.ordersystem.order.controller;
 
-import com.example.ordersystem.dto.OrderCreateRequest;
-import com.example.ordersystem.dto.OrderGetResponse;
-import com.example.ordersystem.dto.OrderUpdateRequest;
-import com.example.ordersystem.service.OrderService;
+import com.example.ordersystem.order.dto.OrderCreateRequest;
+import com.example.ordersystem.order.dto.OrderGetResponse;
+import com.example.ordersystem.order.dto.OrderUpdateRequest;
+import com.example.ordersystem.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest){
+    public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest) {
         return orderService.addOrder(orderCreateRequest);
     }
 
@@ -29,12 +29,12 @@ public class OrderController {
     }
 
     @PutMapping
-    public String updateOrder(@RequestBody OrderUpdateRequest orderUpdateRequest){
+    public String updateOrder(@RequestBody OrderUpdateRequest orderUpdateRequest) {
         return orderService.updateOrder(orderUpdateRequest);
     }
 
     @DeleteMapping
-    public String deleteOrder(){
+    public String deleteOrder() {
         return orderService.deleteOrder();
     }
 }
