@@ -1,9 +1,6 @@
 package com.example.ordersystem.orderer.entity;
 
-import com.example.ordersystem.order.entity.Order;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "orderers")
@@ -15,7 +12,8 @@ public class Orderer {
     @Column(unique = true, nullable = false)
     private String ordererName;
 
-    protected Orderer(){}
+    protected Orderer() {
+    }
 
     public Orderer(String ordererName) {
         this.ordererName = ordererName;
