@@ -4,8 +4,10 @@ import com.example.ordersystem.orderer.dto.OrdererCreateRequest;
 import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.repository.OrdererRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class OrdererService {
@@ -19,6 +21,9 @@ public class OrdererService {
     }
 
     public String addOrderer(OrdererCreateRequest ordererCreateRequest) {
+        if (ordererRepository.findByEmail(ordererCreateRequest.email()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이메일이 이미 존재합니다.");
+        }
 
         Orderer orderer = new Orderer(ordererCreateRequest.ordererName(), ordererCreateRequest.email(), passwordEncoder.encode(ordererCreateRequest.password()));
         ordererRepository.save(orderer);
