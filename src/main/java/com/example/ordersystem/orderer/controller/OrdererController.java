@@ -18,7 +18,7 @@ public class OrdererController {
         this.ordererService = ordererService;
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public String addOrderer(@RequestBody OrdererCreateRequest ordererCreateRequest) {
         return ordererService.addOrderer(ordererCreateRequest);
     }
