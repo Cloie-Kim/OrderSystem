@@ -1,12 +1,9 @@
 package com.example.ordersystem.menu.entity;
 
-import com.example.ordersystem.order.entity.Order;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-@Table(name="menus")
+@Table(name = "menus")
 public class Menu {
 
     @Id

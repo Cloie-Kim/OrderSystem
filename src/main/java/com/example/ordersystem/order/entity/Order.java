@@ -4,8 +4,6 @@ import com.example.ordersystem.menu.entity.Menu;
 import com.example.ordersystem.orderer.entity.Orderer;
 import jakarta.persistence.*;
 
-import java.util.Optional;
-
 @Entity
 @Table(name = "orders")
 public class Order {

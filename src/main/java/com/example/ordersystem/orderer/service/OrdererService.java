@@ -18,6 +18,6 @@ public class OrdererService {
     public String addOrderer(OrdererCreateRequest ordererCreateRequest) {
         Orderer orderer = new Orderer(ordererCreateRequest.ordererName());
         ordererRepository.save(orderer);
-        return ordererCreateRequest.ordererName()+"님, 환영해요!";
+        return ordererCreateRequest.ordererName() + "님, 환영해요!";
     }
 }

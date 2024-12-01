@@ -1,7 +1,6 @@
 package com.example.ordersystem.orderer.controller;
 
 import com.example.ordersystem.orderer.dto.OrdererCreateRequest;
-import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.service.OrdererService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

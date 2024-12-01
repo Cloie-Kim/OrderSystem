@@ -11,6 +11,7 @@ import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.repository.OrdererRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -25,6 +26,7 @@ public class OrderService {
         this.ordererRepository = ordererRepository;
     }
 
+    @Transactional
     public String addOrder(OrderCreateRequest orderCreateRequest) {
         Menu menu = menuRepository.findById(orderCreateRequest.menuFK())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid menu ID"));
@@ -42,15 +44,16 @@ public class OrderService {
         return new OrderGetResponse(orderRepository.findAll());
     }
 
-
+    @Transactional
     public String updateOrder(OrderUpdateRequest orderUpdateRequest) {
         Order order = orderRepository.findById(orderUpdateRequest.id()).get();
-        Menu menu=menuRepository.findById(orderUpdateRequest.menuFK()).get();
+        Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).get();
         order.update(orderUpdateRequest.quantity(), menu);
         orderRepository.save(order);
         return "주문 수정 완료";
     }
 
+    @Transactional
     public String deleteOrder(Long id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Order not found"));
@@ -58,6 +61,7 @@ public class OrderService {
         return id + "번 주문이 취소되었습니다.";
     }
 
+    @Transactional
     public String deleteAllOrder() {
         orderRepository.deleteAll();
         return "주문 삭제 완료";
