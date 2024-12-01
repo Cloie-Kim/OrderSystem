@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/orderer")
 public class OrdererController {
-    private OrdererService ordererService;
+    private final OrdererService ordererService;
 
     @Autowired
     public OrdererController(OrdererService ordererService) {

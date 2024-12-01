@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class OrdererService {
-    private OrdererRepository ordererRepository;
+    private final OrdererRepository ordererRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
