@@ -22,11 +22,17 @@ public class OrdererService {
 
     public String addOrderer(OrdererCreateRequest ordererCreateRequest) {
         if (ordererRepository.findByEmail(ordererCreateRequest.email()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이메일이 이미 존재합니다.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 등록된 이메일입니다.");
         }
 
-        Orderer orderer = new Orderer(ordererCreateRequest.ordererName(), ordererCreateRequest.email(), passwordEncoder.encode(ordererCreateRequest.password()));
+        Orderer orderer = new Orderer(
+                ordererCreateRequest.ordererName(),
+                ordererCreateRequest.email(),
+                passwordEncoder.encode(ordererCreateRequest.password())
+        );
+
         ordererRepository.save(orderer);
         return ordererCreateRequest.ordererName() + "님, 환영해요!";
     }
+
 }

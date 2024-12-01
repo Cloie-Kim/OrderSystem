@@ -17,9 +17,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // CSRF 보호 비활성화
                 .authorizeRequests()
-                .requestMatchers("/", "/menu", "/orderer/signup", "/signup", "/login")  // 정확한 경로 매핑 확인
+                .requestMatchers("/", "/menu", "/signup", "/orderer", "/login")  // 경로 수정: 로그인, 회원가입, 메뉴 페이지 허용
                 .permitAll()  // 인증 없이 접근 허용
-                .anyRequest().authenticated();  // 나머지 요청은 인증 필요
+                .anyRequest().authenticated()  // 나머지 요청은 인증 필요
+                .and();
 
         return http.build();
     }
