@@ -13,7 +13,7 @@ public class Menu {
     @Column(unique = true, nullable = false)
     private String menuName;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private Integer price;
 
 }
