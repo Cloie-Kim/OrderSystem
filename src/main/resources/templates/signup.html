@@ -64,11 +64,6 @@
             color: red;
             margin-top: 10px;
         }
-
-        .success-message {
-            color: green;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -123,8 +118,7 @@
             const result = await response.text();
 
             if (response.ok) {
-                responseMessageDiv.style.color = 'green';
-                responseMessageDiv.textContent = result;
+                window.location.href = '/signupSuccess';
             } else {
                 responseMessageDiv.style.color = 'red';
                 responseMessageDiv.textContent = result;

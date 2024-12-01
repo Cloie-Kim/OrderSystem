@@ -3,6 +3,7 @@ package com.example.ordersystem.orderer.service;
 import com.example.ordersystem.orderer.dto.OrdererCreateRequest;
 import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.repository.OrdererRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +21,8 @@ public class OrdererService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String addOrderer(OrdererCreateRequest ordererCreateRequest) {
+    @Transactional
+    public void addOrderer(OrdererCreateRequest ordererCreateRequest) {
         if (ordererRepository.findByEmail(ordererCreateRequest.email()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 등록된 이메일입니다.");
         }
@@ -32,7 +34,6 @@ public class OrdererService {
         );
 
         ordererRepository.save(orderer);
-        return ordererCreateRequest.ordererName() + "님, 환영해요!";
     }
 
 }
