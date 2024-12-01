@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Orderer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ordererId;
+    private Long ordererId;
 
     @Column(unique = true, nullable = false)
     private String ordererName;
