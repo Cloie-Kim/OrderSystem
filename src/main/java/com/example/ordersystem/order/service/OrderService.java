@@ -9,9 +9,9 @@ import com.example.ordersystem.order.entity.Order;
 import com.example.ordersystem.order.repository.OrderRepository;
 import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.repository.OrdererRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -44,14 +44,10 @@ public class OrderService {
         return new OrderGetResponse(orderRepository.findAll());
     }
 
-
     @Transactional
     public String updateOrder(OrderUpdateRequest orderUpdateRequest) {
-        Order order = orderRepository.findById(orderUpdateRequest.id())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid order ID"));
-        Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).
-                orElseThrow(() -> new IllegalArgumentException("Invalid menu ID"));
-
+        Order order = orderRepository.findById(orderUpdateRequest.id()).get();
+        Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).get();
         order.update(orderUpdateRequest.quantity(), menu);
         orderRepository.save(order);
         return "주문 수정 완료";
