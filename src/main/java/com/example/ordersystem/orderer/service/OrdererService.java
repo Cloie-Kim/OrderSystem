@@ -1,6 +1,6 @@
 package com.example.ordersystem.orderer.service;
 
-import com.example.ordersystem.orderer.dto.OrdererCreateRequest;
+import com.example.ordersystem.orderer.dto.OrdererCreateRequestDTO;
 import com.example.ordersystem.orderer.entity.Orderer;
 import com.example.ordersystem.orderer.repository.OrdererRepository;
 import jakarta.transaction.Transactional;
@@ -22,15 +22,15 @@ public class OrdererService {
     }
 
     @Transactional
-    public void addOrderer(OrdererCreateRequest ordererCreateRequest) {
-        if (ordererRepository.findByEmail(ordererCreateRequest.email()).isPresent()) {
+    public void addOrderer(OrdererCreateRequestDTO ordererCreateRequestDTO) {
+        if (ordererRepository.findByEmail(ordererCreateRequestDTO.email()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 등록된 이메일입니다.");
         }
 
         Orderer orderer = new Orderer(
-                ordererCreateRequest.ordererName(),
-                ordererCreateRequest.email(),
-                passwordEncoder.encode(ordererCreateRequest.password())
+                ordererCreateRequestDTO.ordererName(),
+                ordererCreateRequestDTO.email(),
+                passwordEncoder.encode(ordererCreateRequestDTO.password())
         );
 
         ordererRepository.save(orderer);

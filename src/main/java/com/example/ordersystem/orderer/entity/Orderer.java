@@ -1,5 +1,7 @@
 package com.example.ordersystem.orderer.entity;
 
+import com.example.ordersystem.orderer.dto.OrdererAuthDTO;
+import com.example.ordersystem.orderer.dto.OrdererSessionDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,5 +28,14 @@ public class Orderer {
         this.email = email;
         this.password = password;
     }
+
+    public OrdererAuthDTO toAuthDTO() {
+        return new OrdererAuthDTO(this.ordererId, this.ordererName, this.email, this.password);
+    }
+
+    public OrdererSessionDTO toSessionDTO() {
+        return new OrdererSessionDTO(this.ordererId);
+    }
+
 
 }

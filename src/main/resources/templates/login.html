@@ -59,13 +59,18 @@
         button:hover {
             background-color: #A9D0F5;
         }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>로그인</h2>
-    <form action="/orderer" method="POST" id="loginForm">
-
+    <form id="loginForm">
         <div class="form-group">
             <label for="email">이메일</label>
             <input type="email" id="email" name="email" required placeholder="이메일을 입력하세요" maxlength="30">
@@ -78,6 +83,45 @@
 
         <button type="submit">로그인</button>
     </form>
+
+    <div id="responseMessage" class="error-message"></div>
 </div>
+
+<script>
+    const loginForm = document.getElementById('loginForm');
+    const responseMessageDiv = document.getElementById('responseMessage');
+
+    loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(loginForm);
+
+        const data = {
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
+
+        try {
+            const response = await fetch('/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                window.location.href = '/loginSuccess';
+            } else {
+                const result = await response.text();
+                responseMessageDiv.textContent = result || "로그인 실패. 다시 시도하세요.";
+            }
+        } catch (error) {
+            console.error("로그인 중 오류 발생:", error);
+            responseMessageDiv.textContent = "로그인 중 문제가 발생했습니다.";
+        }
+    });
+
+</script>
 </body>
 </html>

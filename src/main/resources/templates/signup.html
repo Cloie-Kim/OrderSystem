@@ -115,13 +115,12 @@
                 body: JSON.stringify(data)
             });
 
-            const result = await response.text();
-
             if (response.ok) {
                 window.location.href = '/signupSuccess';
             } else {
+                const result = await response.text();
                 responseMessageDiv.style.color = 'red';
-                responseMessageDiv.textContent = result;
+                responseMessageDiv.textContent = result || "회원가입에 실패했습니다.";
             }
 
         } catch (error) {

@@ -1,6 +1,6 @@
 package com.example.ordersystem.orderer.controller;
 
-import com.example.ordersystem.orderer.dto.OrdererCreateRequest;
+import com.example.ordersystem.orderer.dto.OrdererCreateRequestDTO;
 import com.example.ordersystem.orderer.service.OrdererService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +21,14 @@ public class OrdererController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addOrderer(@RequestBody OrdererCreateRequest ordererCreateRequest) {
+    public ResponseEntity<String> addOrderer(@RequestBody OrdererCreateRequestDTO ordererCreateRequestDTO) {
         try {
-            ordererService.addOrderer(ordererCreateRequest);
-
-            return ResponseEntity.status(HttpStatus.FOUND)
-                    .header("Location", "/signupSuccess")
-                    .build();
+            ordererService.addOrderer(ordererCreateRequestDTO);
+            return ResponseEntity.ok("회원가입 성공");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("회원가입 실패: " + e.getMessage());
         }
     }
+
 }
