@@ -71,8 +71,8 @@
     <h2>회원가입</h2>
     <form id="signupForm">
         <div class="form-group">
-            <label for="ordererName">이름</label>
-            <input type="text" id="ordererName" name="ordererName" required placeholder="이름을 입력하세요" maxlength="4">
+            <label for="userName">이름</label>
+            <input type="text" id="userName" name="userName" required placeholder="이름을 입력하세요" maxlength="4">
         </div>
 
         <div class="form-group">
@@ -101,13 +101,13 @@
         const formData = new FormData(signupForm);
 
         const data = {
-            ordererName: formData.get('ordererName'),
+            userName: formData.get('userName'),
             email: formData.get('email'),
             password: formData.get('password')
         };
 
         try {
-            const response = await fetch('/orderer', {
+            const response = await fetch('/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
