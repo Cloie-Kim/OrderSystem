@@ -27,11 +27,11 @@ public class OrderService {
     }
 
     @Transactional
-    public String addOrder(OrderCreateRequest orderCreateRequest) {
+    public String addOrder(OrderCreateRequest orderCreateRequest, Long userId) {
         Menu menu = menuRepository.findById(orderCreateRequest.menuFK())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid menu ID"));
 
-        Orderer orderer = ordererRepository.findById(orderCreateRequest.ordererFK())
+        Orderer orderer = ordererRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid orderer ID"));
 
         Order order = new Order(menu, orderer, orderCreateRequest.quantity());
@@ -40,13 +40,13 @@ public class OrderService {
         return "주문 완료";
     }
 
-    public OrderGetResponse getOrder() {
+    public OrderGetResponse getOrder(Long userId) {
         return new OrderGetResponse(orderRepository.findAll());
     }
 
     @Transactional
-    public String updateOrder(OrderUpdateRequest orderUpdateRequest) {
-        Order order = orderRepository.findById(orderUpdateRequest.id()).get();
+    public String updateOrder(OrderUpdateRequest orderUpdateRequest, Long userId) {
+        Order order = orderRepository.findById(userId).get();
         Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).get();
         order.update(orderUpdateRequest.quantity(), menu);
         orderRepository.save(order);
@@ -54,15 +54,7 @@ public class OrderService {
     }
 
     @Transactional
-    public String deleteOrder(Long id) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Order not found"));
-        orderRepository.delete(order);
-        return id + "번 주문이 취소되었습니다.";
-    }
-
-    @Transactional
-    public String deleteAllOrder() {
+    public String deleteAllOrder(Long userId) {
         orderRepository.deleteAll();
         return "주문 삭제 완료";
     }
