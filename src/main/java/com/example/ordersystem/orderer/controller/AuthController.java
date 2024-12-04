@@ -25,9 +25,8 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequestDTO, HttpSession session) {
         try {
-            OrdererSessionDTO sessionDTO = authService.authenticate(loginRequestDTO);
-            session.setAttribute("loggedInUser", sessionDTO);
-
+            OrdererSessionDTO sessionDTO = authService.login(loginRequestDTO);
+            session.setAttribute("loggedInUser", sessionDTO.ordererId());
             return ResponseEntity.ok("로그인 성공");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

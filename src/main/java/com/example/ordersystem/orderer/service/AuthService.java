@@ -20,7 +20,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public OrdererSessionDTO authenticate(LoginRequestDTO loginRequestDTO) {
+    public OrdererSessionDTO login(LoginRequestDTO loginRequestDTO) {
         Orderer orderer = ordererRepository.findByEmail(loginRequestDTO.email())
                 .orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다."));
 

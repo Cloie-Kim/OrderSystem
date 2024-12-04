@@ -62,7 +62,8 @@
         로그인에 성공했어요!
     </div>
     <br><br>
-    <form action="/order" method="get">
+    <form action="/orders" method="get">
+        <input type="hidden" name="sessionId" value="YOUR_SESSION_ID">
         <button type="submit">주문으로 가기</button>
     </form>
 </div>
