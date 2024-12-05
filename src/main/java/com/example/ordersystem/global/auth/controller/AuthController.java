@@ -33,4 +33,10 @@ public class AuthController {
                     .body("로그인 실패: " + e.getMessage());
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.removeAttribute("loggedInUser");
+        return ResponseEntity.ok("로그아웃 성공");
+    }
 }
