@@ -1,8 +1,8 @@
-package com.example.ordersystem.orderer.controller;
+package com.example.ordersystem.global.auth.controller;
 
-import com.example.ordersystem.orderer.dto.LoginRequestDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
-import com.example.ordersystem.orderer.service.AuthService;
+import com.example.ordersystem.global.auth.dto.LoginRequestDTO;
+import com.example.ordersystem.global.auth.dto.UserSessionDTO;
+import com.example.ordersystem.global.auth.service.AuthService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

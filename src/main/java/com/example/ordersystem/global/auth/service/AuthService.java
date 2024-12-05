@@ -1,8 +1,8 @@
-package com.example.ordersystem.orderer.service;
+package com.example.ordersystem.global.auth.service;
 
-import com.example.ordersystem.orderer.dto.LoginRequestDTO;
-import com.example.ordersystem.orderer.dto.UserAuthDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
+import com.example.ordersystem.global.auth.dto.LoginRequestDTO;
+import com.example.ordersystem.global.auth.dto.UserAuthDTO;
+import com.example.ordersystem.global.auth.dto.UserSessionDTO;
 import com.example.ordersystem.orderer.entity.User;
 import com.example.ordersystem.orderer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

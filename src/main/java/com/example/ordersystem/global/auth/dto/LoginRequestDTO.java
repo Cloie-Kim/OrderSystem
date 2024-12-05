@@ -1,4 +1,4 @@
-package com.example.ordersystem.orderer.dto;
+package com.example.ordersystem.global.auth.dto;
 
 public record LoginRequestDTO(String email, String password) {
 }

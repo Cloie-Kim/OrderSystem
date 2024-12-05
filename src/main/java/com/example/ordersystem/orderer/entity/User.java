@@ -1,8 +1,8 @@
 package com.example.ordersystem.orderer.entity;
 
 import com.example.ordersystem.order.entity.Order;
-import com.example.ordersystem.orderer.dto.UserAuthDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
+import com.example.ordersystem.global.auth.dto.UserAuthDTO;
+import com.example.ordersystem.global.auth.dto.UserSessionDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
