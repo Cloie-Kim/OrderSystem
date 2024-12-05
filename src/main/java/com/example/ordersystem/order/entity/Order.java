@@ -32,7 +32,6 @@ public class Order {
     }
 
     public void update(Integer quantity, Menu menu) {
-
         this.quantity = quantity;
         this.menu = menu;
     }

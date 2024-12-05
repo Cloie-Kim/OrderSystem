@@ -25,11 +25,6 @@ public class PageController {
         return "login";
     }
 
-    @GetMapping("/menu")
-    public String menuPage() {
-        return "menu";
-    }
-
     @GetMapping("/loginSuccess")
     public String loginSuccessPage() {
         return "loginSuccess";
