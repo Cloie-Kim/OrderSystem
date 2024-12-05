@@ -9,17 +9,17 @@ import jakarta.persistence.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderId;
 
     @Column
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "userFK")
+    @JoinColumn(name = "userId")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "menuFK")
+    @JoinColumn(name = "menuId")
     private Menu menu;
 
     protected Order() {
