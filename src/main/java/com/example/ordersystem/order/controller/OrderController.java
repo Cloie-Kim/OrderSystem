@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-
-    @Autowired
+    
     private final OrderService orderService;
 
     public OrderController(OrderService orderService) {
@@ -21,25 +20,29 @@ public class OrderController {
 
     @PostMapping
     public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest, HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("loggedInUser");
+        Long userId = getLoggedInUser(request);
         return orderService.addOrder(orderCreateRequest, userId);
     }
 
     @GetMapping
     public OrderGetResponse getOrder(HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("loggedInUser");
+        Long userId = getLoggedInUser(request);
         return orderService.getOrder(userId);
+    }
+
+    private static Long getLoggedInUser(HttpServletRequest request) {
+        return (Long) request.getSession().getAttribute("loggedInUser");
     }
 
     @PutMapping
     public String updateOrder(@RequestBody OrderUpdateRequest orderUpdateRequest, HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("loggedInUser");
+        Long userId = getLoggedInUser(request);
         return orderService.updateOrder(orderUpdateRequest, userId);
     }
 
     @DeleteMapping
     public String deleteAllOrder(HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("loggedInUser");
+        Long userId = getLoggedInUser(request);
         return orderService.deleteAllOrder(userId);
     }
 }

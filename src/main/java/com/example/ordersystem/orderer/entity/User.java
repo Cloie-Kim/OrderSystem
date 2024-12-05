@@ -2,6 +2,7 @@ package com.example.ordersystem.orderer.entity;
 
 import com.example.ordersystem.order.entity.Order;
 import com.example.ordersystem.global.auth.dto.UserAuthDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Order> orders=new ArrayList<>();
 
     protected User() {

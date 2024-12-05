@@ -40,8 +40,7 @@ public class OrderService {
         return "주문 완료";
     }
 
-    public OrderGetResponse getOrder(Long userId)
-    {
+    public OrderGetResponse getOrder(Long userId){
         return new OrderGetResponse(orderRepository.findByUserUserId(userId));
     }
 
