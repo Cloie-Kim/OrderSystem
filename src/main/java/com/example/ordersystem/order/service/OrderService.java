@@ -28,7 +28,7 @@ public class OrderService {
 
     @Transactional
     public String addOrder(OrderCreateRequest orderCreateRequest, Long userId) {
-        Menu menu = menuRepository.findById(orderCreateRequest.menuFK())
+        Menu menu = menuRepository.findById(orderCreateRequest.menuId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid menu ID"));
 
         User user = userRepository.findById(userId)
@@ -48,7 +48,7 @@ public class OrderService {
     @Transactional
     public String updateOrder(OrderUpdateRequest orderUpdateRequest, Long userId) {
         Order order = orderRepository.findById(userId).get();
-        Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).get();
+        Menu menu = menuRepository.findById(orderUpdateRequest.menuId()).get();
         order.update(orderUpdateRequest.quantity(), menu);
         orderRepository.save(order);
         return "주문 수정 완료";
