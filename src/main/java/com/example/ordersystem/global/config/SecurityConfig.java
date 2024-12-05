@@ -1,4 +1,4 @@
-package com.example.ordersystem.config;
+package com.example.ordersystem.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -18,7 +17,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/", "/home", "/menu", "/signup", "/login", "/signupSuccess", "/orderer")
+                .requestMatchers("/", "/home", "/menu", "/signup", "/login", "/auth", "/signupSuccess", "/loginSuccess", "/users")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and();

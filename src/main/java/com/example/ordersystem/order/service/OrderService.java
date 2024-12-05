@@ -7,8 +7,8 @@ import com.example.ordersystem.order.dto.OrderGetResponse;
 import com.example.ordersystem.order.dto.OrderUpdateRequest;
 import com.example.ordersystem.order.entity.Order;
 import com.example.ordersystem.order.repository.OrderRepository;
-import com.example.ordersystem.orderer.entity.Orderer;
-import com.example.ordersystem.orderer.repository.OrdererRepository;
+import com.example.ordersystem.orderer.entity.User;
+import com.example.ordersystem.orderer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,36 +17,36 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
-    private final OrdererRepository ordererRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, MenuRepository menuRepository, OrdererRepository ordererRepository) {
+    public OrderService(OrderRepository orderRepository, MenuRepository menuRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.menuRepository = menuRepository;
-        this.ordererRepository = ordererRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
-    public String addOrder(OrderCreateRequest orderCreateRequest) {
+    public String addOrder(OrderCreateRequest orderCreateRequest, Long userId) {
         Menu menu = menuRepository.findById(orderCreateRequest.menuFK())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid menu ID"));
 
-        Orderer orderer = ordererRepository.findById(orderCreateRequest.ordererFK())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid orderer ID"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
-        Order order = new Order(menu, orderer, orderCreateRequest.quantity());
+        Order order = new Order(menu, user, orderCreateRequest.quantity());
 
         orderRepository.save(order);
         return "주문 완료";
     }
 
-    public OrderGetResponse getOrder() {
+    public OrderGetResponse getOrder(Long userId) {
         return new OrderGetResponse(orderRepository.findAll());
     }
 
     @Transactional
-    public String updateOrder(OrderUpdateRequest orderUpdateRequest) {
-        Order order = orderRepository.findById(orderUpdateRequest.id()).get();
+    public String updateOrder(OrderUpdateRequest orderUpdateRequest, Long userId) {
+        Order order = orderRepository.findById(userId).get();
         Menu menu = menuRepository.findById(orderUpdateRequest.menuFK()).get();
         order.update(orderUpdateRequest.quantity(), menu);
         orderRepository.save(order);
@@ -54,15 +54,7 @@ public class OrderService {
     }
 
     @Transactional
-    public String deleteOrder(Long id) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Order not found"));
-        orderRepository.delete(order);
-        return id + "번 주문이 취소되었습니다.";
-    }
-
-    @Transactional
-    public String deleteAllOrder() {
+    public String deleteAllOrder(Long userId) {
         orderRepository.deleteAll();
         return "주문 삭제 완료";
     }
