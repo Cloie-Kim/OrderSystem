@@ -1,11 +1,15 @@
 package com.example.ordersystem.orderer.entity;
 
+import com.example.ordersystem.order.entity.Order;
 import com.example.ordersystem.orderer.dto.UserAuthDTO;
 import com.example.ordersystem.orderer.dto.UserSessionDTO;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders=new ArrayList<>();
 
     protected User() {
     }

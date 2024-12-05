@@ -5,21 +5,21 @@ import com.example.ordersystem.orderer.entity.User;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name="orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long order_id;
 
-    @Column
+    @Column(nullable=false)
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "userFK")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "menuFK")
+    @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
 
     protected Order() {
@@ -32,7 +32,6 @@ public class Order {
     }
 
     public void update(Integer quantity, Menu menu) {
-
         this.quantity = quantity;
         this.menu = menu;
     }

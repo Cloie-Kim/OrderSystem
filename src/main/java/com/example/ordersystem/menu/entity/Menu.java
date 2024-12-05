@@ -3,7 +3,7 @@ package com.example.ordersystem.menu.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "menus")
+@Table(name="menus")
 public class Menu {
 
     @Id

@@ -21,7 +21,7 @@ public class OrderController {
 
     @PostMapping
     public String addOrder(@RequestBody OrderCreateRequest orderCreateRequest, HttpServletRequest request) {
-        Long userId=(Long) request.getAttribute("loggedInUser");
+        Long userId = (Long) request.getAttribute("loggedInUser");
         return orderService.addOrder(orderCreateRequest, userId);
     }
 
