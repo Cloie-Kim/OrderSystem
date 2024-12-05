@@ -9,13 +9,22 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+
+        String[] publicAvailablePaths = {"/home", "/login", "/signup", "/signupSuccess", "/loginSuccess"};
+        String requestURI = request.getRequestURI();
+
+        for (String path : publicAvailablePaths) {
+            if (requestURI.startsWith(path)) {
+                return true;
+            }
+        }
 
         if (session == null || session.getAttribute("loggedInUser") == null) {
-            //로그인을 하라고 하기
-            System.out.println("session is null");
             response.sendRedirect("/login");
+            return false;
         }
+
         return true;
     }
 }
