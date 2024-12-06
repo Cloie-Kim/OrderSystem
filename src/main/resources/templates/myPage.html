@@ -230,6 +230,10 @@
             <button type="submit">주문하기</button>
         </div>
     </div>
+    <div class="form-container" id="orderHistoryContainer">
+        <h2 class="form-header">주문 내역</h2>
+        <div id="orderList"></div>
+    </div>
 </div>
 
 <script>
@@ -238,9 +242,11 @@
     const logoutButton = document.getElementById('logoutButton');
     const orderFormContainer = document.getElementById('orderFormContainer');
     const orderHistoryContainer = document.getElementById('orderHistoryContainer');
+    const orderList = document.getElementById('orderList');
 
     // 주문하기 버튼
     orderButton.addEventListener('click', function () {
+        orderHistoryContainer.style.display = 'none';
         orderFormContainer.style.display = 'block'; // 주문 폼 표시
     });
 
@@ -248,7 +254,7 @@
     historyButton.addEventListener('click', function () {
         orderFormContainer.style.display = 'none';
         orderHistoryContainer.style.display = 'block';
-        fetchOrderHistory();
+        fetchOrderHistory(); // 주문 내역 조회
     });
 
     // 로그아웃 버튼
@@ -327,18 +333,25 @@
         })
             .then(response => response.json())
             .then(data => {
-                orderList.innerHTML = '';
-                data.orders.forEach(order => {
-                    const orderItem = document.createElement('div');
-                    orderItem.className = 'order-item';
-                    orderItem.innerHTML = `
-                        <span>메뉴: ${order.menuName}</span>
-                        <span>수량: ${order.quantity}</span>
-                    `;
-                    orderList.appendChild(orderItem);
-                });
+                orderList.innerHTML = ''; // 기존 리스트 초기화
+                if (data.orders && data.orders.length > 0) {
+                    data.orders.forEach(order => {
+                        const orderItem = document.createElement('div');
+                        orderItem.className = 'order-item';
+                        orderItem.innerHTML = `
+                            <span>메뉴: ${order.menuName}</span>
+                            <span>수량: ${order.quantity}</span>
+                        `;
+                        orderList.appendChild(orderItem);
+                    });
+                } else {
+                    orderList.innerHTML = '<p>주문 내역이 없습니다.</p>';
+                }
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error('오류:', error);
+                orderList.innerHTML = '<p>주문 내역을 불러오는 데 실패했습니다.</p>';
+            });
     }
 </script>
 </body>

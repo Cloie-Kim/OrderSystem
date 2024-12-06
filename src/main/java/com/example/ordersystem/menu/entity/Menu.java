@@ -16,4 +16,8 @@ public class Menu {
     @Column(nullable = false)
     private Integer price;
 
+    public String getMenuName() {
+        return menuName;
+    }
+
 }
