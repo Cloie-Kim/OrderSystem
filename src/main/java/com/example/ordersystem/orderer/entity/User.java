@@ -1,8 +1,8 @@
 package com.example.ordersystem.orderer.entity;
 
 import com.example.ordersystem.order.entity.Order;
-import com.example.ordersystem.orderer.dto.UserAuthDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
+import com.example.ordersystem.global.auth.dto.UserAuthDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -39,10 +39,4 @@ public class User {
     public UserAuthDTO toAuthDTO() {
         return new UserAuthDTO(this.userId, this.userName, this.email, this.password);
     }
-
-    public UserSessionDTO toSessionDTO() {
-        return new UserSessionDTO(this.userId);
-    }
-
-
 }

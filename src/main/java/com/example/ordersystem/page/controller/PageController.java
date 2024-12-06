@@ -1,5 +1,6 @@
 package com.example.ordersystem.page.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -29,4 +30,10 @@ public class PageController {
     public String loginSuccessPage() {
         return "loginSuccess";
     }
+
+    @GetMapping("/mypage")
+    public String mypage() {
+        return "myPage";
+    }
+
 }

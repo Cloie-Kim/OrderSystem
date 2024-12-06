@@ -1,8 +1,8 @@
-package com.example.ordersystem.orderer.controller;
+package com.example.ordersystem.global.auth.controller;
 
-import com.example.ordersystem.orderer.dto.LoginRequestDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
-import com.example.ordersystem.orderer.service.AuthService;
+import com.example.ordersystem.global.auth.dto.LoginRequestDTO;
+import com.example.ordersystem.global.auth.service.AuthService;
+import com.example.ordersystem.orderer.entity.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +25,8 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequestDTO, HttpSession session) {
         try {
-            UserSessionDTO sessionDTO = authService.login(loginRequestDTO);
-            session.setAttribute("loggedInUser", sessionDTO.userId());
+            Long userId = authService.login(loginRequestDTO);
+            session.setAttribute("loggedInUser", userId);
             return ResponseEntity.ok("로그인 성공");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -34,4 +34,9 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        session.removeAttribute("loggedInUser");
+        return ResponseEntity.ok("로그아웃 성공");
+    }
 }

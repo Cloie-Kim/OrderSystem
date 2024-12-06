@@ -1,8 +1,7 @@
-package com.example.ordersystem.orderer.service;
+package com.example.ordersystem.global.auth.service;
 
-import com.example.ordersystem.orderer.dto.LoginRequestDTO;
-import com.example.ordersystem.orderer.dto.UserAuthDTO;
-import com.example.ordersystem.orderer.dto.UserSessionDTO;
+import com.example.ordersystem.global.auth.dto.LoginRequestDTO;
+import com.example.ordersystem.global.auth.dto.UserAuthDTO;
 import com.example.ordersystem.orderer.entity.User;
 import com.example.ordersystem.orderer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserSessionDTO login(LoginRequestDTO loginRequestDTO) {
+    public Long login(LoginRequestDTO loginRequestDTO) {
         User user = userRepository.findByEmail(loginRequestDTO.email())
                 .orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다."));
 
@@ -32,7 +31,7 @@ public class AuthService {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다.");
         }
 
-        return user.toSessionDTO();
+        return userAuthDTO.userId();
     }
 
 }

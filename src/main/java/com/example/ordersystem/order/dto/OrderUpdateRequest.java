@@ -1,4 +1,4 @@
 package com.example.ordersystem.order.dto;
 
-public record OrderUpdateRequest(Long menuFK, Integer quantity) {
+public record OrderUpdateRequest(Long menuId, Integer quantity) {
 }
